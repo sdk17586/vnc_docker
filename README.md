@@ -44,14 +44,14 @@ sudo visudo
 rdv ALL=(ALL:ALL) NOPASSWD:ALL
 ```
 ```bash
-mkdir -p /home/rdv/rdv_webvnc/log/docker_start
-mkdir -p /home/rdv/rdv_webvnc/log/nopasswd
-mkdir -p /home/rdv/rdv_webvnc/log/vnc
+mkdir -p /home/<user>/vnc_docker/log/docker_start
+mkdir -p /home/<user>/vnc_docker/log/nopasswd
+mkdir -p /home/<user>/vnc_docker/log/vnc
 ```
 ```bash
 crontab -e
 
-@reboot /bin/bash /home/rdv/rdv_webvnc/docker_start.sh >> /home/rdv/rdv_webvnc/log/docker_start/docker_start_$(date +\%Y-\%m-\%d_\%H-\%M-\%S).log 2>&1
-@reboot /usr/bin/docker exec web_vnc /root/web_vnc_view/run_nopasswd.sh >> /home/rdv/rdv_webvnc/log/nopasswd/nopasswd_$(date +\%Y-\%m-\%d_\%H-\%M-\%S).log 2>&1
-@reboot /bin/bash /home/rdv/rdv_webvnc/docker_vnc.sh >> /home/rdv/rdv_webvnc/log/vnc/vnc_$(date +\%Y-\%m-\%d_\%H-\%M-\%S).log 2>&1
+@reboot /bin/bash /home/<user>/vnc_docker/docker_start.sh >> /home/<user>/vnc_docker/log/docker_start/docker_start_$(date +\%Y-\%m-\%d_\%H-\%M-\%S).log 2>&1
+@reboot /usr/bin/docker exec web_vnc /root/web_vnc_view/run_nopasswd.sh >> /home/<user>/vnc_docker/log/nopasswd/nopasswd_$(date +\%Y-\%m-\%d_\%H-\%M-\%S).log 2>&1
+@reboot /bin/bash /home/<user>/vnc_docker/docker_vnc.sh >> /home/<user>/vnc_docker/log/vnc/vnc_$(date +\%Y-\%m-\%d_\%H-\%M-\%S).log 2>&1
 ```
