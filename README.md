@@ -1,4 +1,4 @@
-# rdv_webvnc
+# vnc_docker
 
 ## docker pull base image
 ```bash
