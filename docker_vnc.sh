@@ -20,8 +20,8 @@ XAUTH_ENTRIES=$(echo "$DOCKER_EXEC_RESULT" | grep :9)
 
 XAUTH_PATH=$(which xauth)
 
-# rdv 사용자의 홈 디렉터리에서 .Xauthority 파일 경로
-RDV_XAUTHORITY_PATH="/home/rdv/.Xauthority"
+# nsm 사용자의 홈 디렉터리에서 .Xauthority 파일 경로
+RDV_XAUTHORITY_PATH="/home/nsm/.Xauthority"
 
 # XAUTH_ENTRIES의 각 줄을 처리
 IFS=$'\n'
@@ -31,12 +31,12 @@ for line in $XAUTH_ENTRIES; do
     PROTOCOLNAME=$(echo $line | awk '{print $2}')
     HEXKEY=$(echo $line | awk '{print $3}')
 
-    # rdv 사용자에게 xauth 항목 추가
-    ADD_RESULT=$(sudo -u rdv XAUTHORITY=$RDV_XAUTHORITY_PATH $XAUTH_PATH add $DISPLAYNAME $PROTOCOLNAME $HEXKEY 2>&1)
+    # nsm 사용자에게 xauth 항목 추가
+    ADD_RESULT=$(sudo -u nsm XAUTHORITY=$RDV_XAUTHORITY_PATH $XAUTH_PATH add $DISPLAYNAME $PROTOCOLNAME $HEXKEY 2>&1)
     if [ $? -eq 0 ]; then
-        echo "Successfully added xauth entry for rdv user: $line"
+        echo "Successfully added xauth entry for nsm user: $line"
     else
-        echo "Failed to add xauth entry for rdv user: $line. Error: $ADD_RESULT"
+        echo "Failed to add xauth entry for nsm user: $line. Error: $ADD_RESULT"
     fi
 
     # root 사용자에게 xauth 항목 추가
